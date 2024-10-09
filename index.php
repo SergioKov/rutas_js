@@ -27,41 +27,45 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rutas_JS</title>
+    <link type="styleshirt" href="">
+    <link rel="stylesheet" href="./style.css">
 <style>
-body { 
-    font-family: Arial, 
-    sans-serif; 
-}
-nav a { 
-    margin-right: 20px; 
-    text-decoration: none; 
-    color: blue; 
-}
-nav a:hover{
-    color:red;
-}
-nav{
-    display: flex;
-    flex-direction: column;
-}
+
 </style>
 </head>
 <body>
 
+    <!-- Header -->
+    <header>
+        <h1>Bienvenido a Mi SPA</h1>
+        <p>Relájate y disfruta de nuestros tratamientos</p>
+    </header>
+
+    <!-- Menu de navegación -->
     <nav>
-        <a href="/" data-link>Home</a>
-        <a href="/about" data-link>About</a>
-        <a href="/contact" data-link>Contact</a>
-        <a href="/contact_hash/#/aaa" data-link>Contact_hash </a>
-        <a href="/user/1" data-link>User 1</a>
-        <a href="/user/2" data-link>User 2 </a>
-        <a href="/user/3/post/aaa" data-link>User 3 y post/aaa </a>
-        <a href="/user/4/post/1" data-link>Ver Usuario 4 post 1</a>
-        <a href="/user/5/post/2" data-link>Ver Usuario 5 post 2</a>
-        <a href="/user//post/" data-link>Ver Usuario '' post ''</a>
+        <ul>
+            <li><a href="/" data-link>Home</a></li>
+            <li><a href="/about" data-link>About</a></li>
+            <li><a href="/contact" data-link>Contact</a></li>
+            <li><a href="/contact_hash#/aaa" data-link>Contact_hash </a></li>
+            <li><a href="/user" data-link>User</a></li>
+            <li><a href="/user#id=1" data-link>User 1</a></li>
+            <li><a href="/user#id=2" data-link>User 2 </a></li>
+            <li><a href="/user#id=2&postId=1" data-link>#User id:2 postId:1 </a></li>
+            <li><a href="/user#id=3&postId=2" data-link>#User id:3 postId:2 </a></li>
+            <li><a href="/user#id=4&postId=2" data-link>#User id:4 postId:2 </a></li>
+        </ul>
     </nav>
 
-    <div id="content"></div>
+    <div id="content">
+
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Mi SPA. Todos los derechos reservados.</p>
+    </footer>    
 
     <script type="module" src="./router.js"></script>
 </body>

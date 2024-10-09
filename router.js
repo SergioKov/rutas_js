@@ -6,6 +6,7 @@ import About from './views/about.js';
 import Contact from './views/contact.js';
 import Contact_hash from './views/contact_hash.js';
 import User from './views/user.js';
+import Error404 from './views/error404.js';
 
 // Rutas configuradas con sus respectivas vistas
 const routes = [
@@ -22,20 +23,28 @@ const routes = [
         view: Contact
     },
     {
-        path: '/contact_hash/#/aaa',
+        path: '/contact_hash',
         view: Contact_hash
+    },
+    {
+        path: '/user/',
+        view: User
     },
     {
         path: '/user/:id',
         view: User
     },
     {
-        path: '/user/:id/post/aaa',
+        path: '/user#id=:id&postId=:postId',
         view: User
     },
     {
         path: '/user/:id/post/:id_post',
         view: User
+    },
+    {
+        path: '/404',
+        view: Error404
     }
 ];
 
@@ -79,11 +88,12 @@ async function router() {
     console.log('=== function router() === ');
    
     const currentPath = window.location.pathname;
+    const currentHash = window.location.hash;//'#/aaa/bbb'
 
     // Encontrar la ruta coincidente
-    let routeMatch = matchRoute(currentPath);
+    let routeMatch = matchRoute(currentPath, currentHash);
     console.log('routeMatch: ',routeMatch);
-    
+
     if(routeMatch){
         console.log('routeMatch.params: ',routeMatch.params);
     }
@@ -91,26 +101,108 @@ async function router() {
 
     // Si no hay coincidencias, mostrar la página 404
     if (!routeMatch) {
-        document.getElementById('content').innerHTML = `<h1>404</h1><p>Página no encontrada.</p>`;
+        // Obtener la vista correspondiente
+        const error404 = routes.find(r => r.path === '/404');
+        console.log('error404: ',error404);
+
+        // Obtener la vista correspondiente
+        const view = error404.view;
+        console.log('view: ',view);
+
+        const params = {};
+        
+        const view_html = await view(params);
+        //console.log('view_html: ',view_html);
+
+        document.getElementById('content').innerHTML = view_html;
         return;
     }
 
     // Obtener la vista correspondiente
     const view = routeMatch.route.view;
-    console.log('view: ',view);
+    //console.log('view: ',view);
 
     
     
-    const view_html = await view(routeMatch.params)
-    console.log('view_html: ',view_html);
+    const view_html = await view(routeMatch.params);
+    //console.log('view_html: ',view_html);
 
     // Cargar la vista y pasarle parámetros
     document.getElementById('content').innerHTML = view_html;
 }
 
 
+// Función para hacer coincidir la ruta con las configuradas (incluye rutas dinámicas)
+function matchRoute(currentPath, currentHash) {
+    console.log('=== function matchRoute(currentPath) === ');
 
+    for (const route of routes) {
+        console.log('route: ', route);
+        
+        const routeParts = route.path.split('/').filter(Boolean); // Divide la ruta en partes y elimina vacíos
+        console.log('routeParts: ', routeParts);
+        
+        const pathParts = currentPath.split('/').filter(Boolean); // Divide el currentPath en partes y elimina vacíos
+        console.log('pathParts: ', pathParts);
 
+        // Comprobación de longitud de partes
+        if (routeParts.length !== pathParts.length) {
+            continue; // Si las longitudes no coinciden, continúa al siguiente
+        }
+
+        let params = {};
+        let matchFound = false; // Inicializa matchFound como false
+
+        if(currentPath === '/'){
+            return { route, params }; // Retorna la ruta y los parámetros encontrados (vacios)
+        }
+
+        for (let i = 0; i < routeParts.length; i++) {
+            const routePart = routeParts[i];
+            console.log('en for --- routePart: ', routePart);
+            
+            const pathPart = pathParts[i];
+            console.log('en for --- pathPart: ', pathPart);
+
+            switch (true) {
+                case routePart.startsWith(':'):
+                    // Es un parámetro, guarda su valor
+                    const paramName = routePart.slice(1); // Extrae el nombre del parámetro. ':id' => 'id'
+                    params[paramName] = pathPart; // Asigna el valor al objeto de parámetros
+                    console.log('switch --- empieza por [:]. paramName: ', paramName);
+                    matchFound = true; // Marca como encontrado si hay un parámetro
+                    break;
+
+                case routePart === pathPart:
+                    console.log('switch --- Coinciden las partes. (routePart === pathPart)');
+                    matchFound = true; // Marca como encontrado si las partes coinciden
+                    let params_hash = getHashParams();
+                    console.log('switch --- params_hash: ', params_hash);
+                    params = params_hash;
+                    break;
+
+                default:
+                    // Si no coincide, marca como no encontrado
+                    matchFound = false;
+                    console.log('switch --- No coincide, marco como no encontrado. matchFound = false');
+                    break;
+            }
+
+            // Si no hay coincidencia, salimos del bucle
+            if (!matchFound) {
+                console.log('--- No hay coincidencia, salimos del bucle');
+                break;
+            }
+        }// end for inner
+
+        if (matchFound) {
+            console.log('--- return: ', { route, params });
+            return { route, params }; // Retorna la ruta y los parámetros encontrados
+        }
+    }// end for outer
+
+    return null; // Si no se encuentra ninguna coincidencia
+}
 
 // Función para hacer coincidir la ruta con las configuradas (incluye rutas dinámicas)
 function old_matchRoute(currentPath) {
@@ -158,71 +250,31 @@ function old_matchRoute(currentPath) {
 
 
 
-function matchRoute(currentPath) {
-    console.log('=== function matchRoute(currentPath) === ');
 
-    for (const route of routes) {
-        console.log('route: ', route);
-        
-        const routeParts = route.path.split('/').filter(Boolean); // Divide la ruta en partes y elimina vacíos
-        console.log('routeParts: ', routeParts);
-        
-        const pathParts = currentPath.split('/').filter(Boolean); // Divide el currentPath en partes y elimina vacíos
-        console.log('pathParts: ', pathParts);
 
-        // Comprobación de longitud de partes
-        if (routeParts.length !== pathParts.length) {
-            continue; // Si las longitudes no coinciden, continúa al siguiente
-        }
-
-        const params = {};
-        let matchFound = false; // Inicializa matchFound como false
-
-        if(currentPath === '/'){
-            return { route, params }; // Retorna la ruta y los parámetros encontrados (vacios)
-        }
-
-        for (let i = 0; i < routeParts.length; i++) {
-            const routePart = routeParts[i];
-            console.log('en for --- routePart: ', routePart);
-            
-            const pathPart = pathParts[i];
-            console.log('en for --- pathPart: ', pathPart);
-
-            switch (true) {
-                case routePart.startsWith(':'):
-                    // Es un parámetro, guarda su valor
-                    const paramName = routePart.slice(1); // Extrae el nombre del parámetro. ':id' => 'id'
-                    params[paramName] = pathPart; // Asigna el valor al objeto de parámetros
-                    console.log('switch --- empieza por [:]. paramName: ', paramName);
-                    matchFound = true; // Marca como encontrado si hay un parámetro
-                    break;
-                case routePart === pathPart:
-                    console.log('switch --- Coinciden las partes. (routePart === pathPart)');
-                    matchFound = true; // Marca como encontrado si las partes coinciden
-                    break;
-                default:
-                    // Si no coincide, marca como no encontrado
-                    matchFound = false;
-                    console.log('switch --- No coincide, marco como no encontrado. matchFound = false');
-                    break;
-            }
-
-            // Si no hay coincidencia, salimos del bucle
-            if (!matchFound) {
-                console.log('--- No hay coincidencia, salimos del bucle');
-                break;
-            }
-        }// end for inner
-
-        if (matchFound) {
-            console.log('--- return: ', { route, params });
-            return { route, params }; // Retorna la ruta y los parámetros encontrados
-        }
-    }// end for outer
-
-    return null; // Si no se encuentra ninguna coincidencia
+function setHashParams(id, postId) {
+    // Establecer el hash en la URL
+    window.location.hash = `id=${id}&postId=${postId}`;
 }
+
+function getHashParams() {
+    const hash = window.location.hash.slice(1); // Eliminar el símbolo '#'
+    const params = new URLSearchParams(hash); // Crear un objeto URLSearchParams
+
+    // Obtener los valores de los parámetros
+    const id = params.get('id');
+    const postId = params.get('postId');
+
+    return { id, postId };
+}
+
+function displayHashParams() {
+    const { id, postId } = getHashParams();
+    const output = document.getElementById('output');
+    output.textContent = `id: ${id}, postId: ${postId}`;
+}
+
+
 
 
 // Escuchar clics en enlaces con `data-link`
@@ -241,3 +293,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar la primera ruta
     router();
 });
+
+

@@ -3,7 +3,19 @@ export default async function Contact_hash(params) {
     const contactEmail = "info@ejemplo.com";
     
     return `
-        <h1>Contact (HASH)</h1>
-        <p>Puedes contactarnos en: <a href="mailto:${contactEmail}">${contactEmail}</a></p>
-    `;
+        <div>
+        
+            <div class="container">
+
+                <div class="block">
+                    <h1>Contact (HASH)</h1>
+                    <p>Puedes contactarnos en: <a href="mailto:${contactEmail}">${contactEmail}</a></p>
+                </div>
+            
+
+            </div>
+
+        </div>
+    `;    
+    
 }
