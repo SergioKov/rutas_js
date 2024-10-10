@@ -22,11 +22,11 @@ export default async function Contact() {
     
 
     // 2. Añadir los estilos desde un archivo externo
-    function addStyles(){
-        loadStyles(`${ruta_desde_raiz}/contact.css`);
+    async function addStyles(){
+        await loadStyles(`${ruta_desde_raiz}/contact.css`);
     };
     
-    function loadStyles(stylePath) {
+    async function loadStyles(stylePath) {
         // Verificar si ya hay un estilo cargado y eliminarlo
         const existingLink = document.querySelector('link[data-dynamic-style]');
         if (existingLink) {

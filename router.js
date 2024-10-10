@@ -106,24 +106,30 @@ async function router() {
     const [view_html, addStyles, addListeners] = await fn_view(routeMatch.params);
     //console.log('view_html: ',view_html);
 
+    //1. Añado estilos para que no se vea html sin estilos.
+    if(addStyles){
+        console.log('[if] --- hay addStyles ');
+        aaa();
+        async function aaa(){
+            //alert('antes de cargar estilos');
+            await addStyles();
+            //alert('estilos cargados');
+        }
+    }else{
+        console.log('[else] --- no hay addStyles ');
+    }
 
-    // Cargar la vista y pasarle parámetros
+    //2. Cargar la vista y pasarle parámetros
     document.getElementById('content').innerHTML = view_html;
 
-    // Añadir los listeners después de que el HTML esté en el DOM
+    //3. Añadir los listeners después de que el HTML esté en el DOM
     if(addListeners){
         console.log('[if] --- hay addListeners ');
         addListeners();
     }else{
         console.log('[else] --- no hay addListeners ');
     }
-
-    if(addStyles){
-        console.log('[if] --- hay addStyles ');
-        addStyles();
-    }else{
-        console.log('[else] --- no hay addStyles ');
-    }    
+    
 }
 
 
@@ -198,51 +204,6 @@ function matchRoute(currentPath, currentHash) {
 
     return null; // Si no se encuentra ninguna coincidencia
 }
-
-// Función para hacer coincidir la ruta con las configuradas (incluye rutas dinámicas)
-function old_matchRoute(currentPath) {
-    for (const route of routes) {
-        console.log('en for --- route: ',route);       
-        
-        
-        const paramNames = [];
-        const regexPath = route.path.replace(/:(\w+)/g, (_, paramName) => {
-            
-            console.log('en replace --- paramName: ',paramName);
-            
-            paramNames.push(paramName);
-            return "([^/]+)";
-        });
-
-        console.log('regexPath: ',regexPath);
-        
-        const regex = new RegExp(`^${regexPath}$`);
-        console.log('regex: ',regex);
-
-        const match = currentPath.match(regex);
-        console.log('match: ',match);
-
-        if (match) {
-            const params = paramNames.reduce((acc, paramName, index) => {
-                console.log('acc: ',acc);
-                console.log('paramName: ',paramName);
-                console.log('index: ',index);
-
-                acc[paramName] = match[index + 1];
-                
-                console.log('return acc: ',acc);
-
-                return acc;
-            }, {});
-
-            console.log('params: ',params);
-
-            return { route, params };
-        }
-    }
-    return null;
-}
-
 
 
 
