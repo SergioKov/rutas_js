@@ -28,7 +28,7 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rutas_JS</title>
     <link type="styleshirt" href="">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
 <style>
 
 </style>

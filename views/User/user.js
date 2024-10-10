@@ -66,26 +66,50 @@ export default async function User(params) {
         post = { postText: `Ya que el usuario es desconocido, no hay ningún post.`};
     }
     
-    const view = `
-        <div>
-        
-            <div class="container">
+    const ruta_desde_raiz = '../../views/User';
 
-                <div class="block">
-                    <h1>Usuario ${userId}</h1>
-                    <p>Nombre: ${user.name}</p>
-                    <p>Edad: ${user.age}</p>
-                    <p>Post: ${post.postText}</p>
-                </div>
-            
+    //1. Cargar el contenido de about.html
+    const response = await fetch(`${ruta_desde_raiz}/user.html`);
 
-            </div>
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
 
-        </div>
-    `;    
+    let htmlContent = await response.text(); // Obtener el contenido HTML
+
+    // Reemplazar los marcadores de posición con las variables
+    htmlContent = htmlContent
+        .replace('${userId}', userId)
+        .replace('${user.name}', user.name)
+        .replace('${user.age}', user.age)
+        .replace('${post.postText}', post.postText)
+    ;
+
+    const view = htmlContent;  
     
+    // 2. Añadir los estilos desde un archivo externo
+    function addStyles(){
+        loadStyles(`${ruta_desde_raiz}/user.css`);
+    };
+    
+    function loadStyles(stylePath) {
+        // Verificar si ya hay un estilo cargado y eliminarlo
+        const existingLink = document.querySelector('link[data-dynamic-style]');
+        if (existingLink) {
+            existingLink.remove(); // Eliminar el estilo anterior
+        }
+    
+        // Crear un nuevo <link> para el archivo de estilos actual
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = stylePath;
+        link.setAttribute('data-dynamic-style', 'true'); // Marcador para identificar este estilo como dinámico
+        document.head.appendChild(link);
+    } 
+    
+    //3. Las funciones de listeners
     const addListeners = null;
-    const addStyles = null;
-    
-    return [view, addListeners];
+
+    // 4. Retornar un array con la vista, los estilos y la función que añade los listeners
+    return [view, addStyles, addListeners];
 }

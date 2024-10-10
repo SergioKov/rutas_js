@@ -1,12 +1,12 @@
 console.log('es router.js');
 
 // Importar las vistas
-import Home from './views/home.js';
-import About from './views/about.js';
-import Contact from './views/contact.js';
-import Contact_hash from './views/contact_hash.js';
-import User from './views/user.js';
-import Error404 from './views/error404.js';
+import Home from './views/Home/home.js';
+import About from './views/About/about.js';
+import Contact from './views/Contact/contact.js';
+import Contact_hash from './views/Contact_hash/contact_hash.js';
+import User from './views/User/user.js';
+import Error404 from './views/Error404/error404.js';
 
 // Rutas configuradas con sus respectivas vistas
 const routes = [
@@ -91,7 +91,7 @@ async function router() {
 
         const params = {};
         
-        const view_html = await fn_view(params);
+        const [view_html/*, addStyles, addListeners*/] = await fn_view(params);
         //console.log('view_html: ',view_html);
 
         document.getElementById('content').innerHTML = view_html;
