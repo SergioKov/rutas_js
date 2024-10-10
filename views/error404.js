@@ -4,7 +4,7 @@ export default async function Error404() {
     const additionalInfo = "Página no encontrada.";
     console.log('es error404');
     
-    return `
+    const view = `
         <div>
         
             <div class="container">
@@ -19,4 +19,9 @@ export default async function Error404() {
 
         </div>
     `;
+
+    const addListeners = null;
+    const addStyles = null;
+    
+    return [view, addListeners];    
 }

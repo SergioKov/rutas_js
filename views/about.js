@@ -3,8 +3,8 @@ export default async function About() {
     const aboutMessage = "Esta es la página de About.";
     const additionalInfo = "Aquí puedes encontrar más información sobre nosotros.";
     console.log('es about');
-    
-    return `
+
+    const view = `
         <div>
         
             <div class="container">
@@ -13,6 +13,9 @@ export default async function About() {
                     <h1>About</h1>
                     <p>${aboutMessage}</p>
                     <p>${additionalInfo}</p>
+                    <br>
+                    <p>Welcome to the About page.</p>
+                    <button id="btn_about">Click Me</button>
                 </div>
             
                 <section class="about-content">
@@ -37,4 +40,51 @@ export default async function About() {
 
         </div>
     `;
+
+    // 2. Añadir los estilos desde un archivo externo
+    function addStyles(){
+        loadStyles('../css/about.css');
+    };
+    
+    function loadStyles(stylePath) {
+        // Verificar si ya hay un estilo cargado y eliminarlo
+        const existingLink = document.querySelector('link[data-dynamic-style]');
+        if (existingLink) {
+            existingLink.remove(); // Eliminar el estilo anterior
+        }
+    
+        // Crear un nuevo <link> para el archivo de estilos actual
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = stylePath;
+        link.setAttribute('data-dynamic-style', 'true'); // Marcador para identificar este estilo como dinámico
+        document.head.appendChild(link);
+    }    
+
+    // Las funciones de listeners
+    function addListeners(){
+        const button = document.getElementById('btn_about');
+        
+        // Remover cualquier listener anterior para evitar duplicados
+        button.removeEventListener('click', handleClick);
+        
+        // Añadir el listener de nuevo
+        button.addEventListener('click', handleClick);
+    };
+
+    let n = 0;
+
+    // Función manejadora del evento
+    function handleClick(event){
+        //alert('Button clicked!');
+        console.log('abajo event: ');
+        console.log(event);
+        console.log('this se refiere a button. this: ', this);
+        console.log('event.currentTarget se refiere a button. event.currentTarget: ', event.currentTarget);
+        n++;
+        this.textContent = `Button clicked ${n} times`;
+    };
+    
+    // 4. Retornar un array con la vista, los estilos y la función que añade los listeners
+    return [view, addStyles, addListeners];
 }

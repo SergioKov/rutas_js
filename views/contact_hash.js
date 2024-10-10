@@ -2,7 +2,7 @@ export default async function Contact_hash(params) {
     // Variables específicas para la página Contact
     const contactEmail = "info@ejemplo.com";
     
-    return `
+    const view = `
         <div>
         
             <div class="container">
@@ -18,4 +18,8 @@ export default async function Contact_hash(params) {
         </div>
     `;    
     
+    const addListeners = null;
+    const addStyles = null;
+    
+    return [view, addListeners];    
 }

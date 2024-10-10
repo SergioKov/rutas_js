@@ -2,7 +2,8 @@ export default async function Home(params) {
     // Simular la carga de datos (puede venir de una API)
     const welcomeMessage = "Bienvenido a la página de inicio.";
     const params_html = (Object.keys(params).length >0) ? params : '' ;
-    return `
+
+    const view = `
         <div>
         
             <div class="container">
@@ -40,4 +41,28 @@ export default async function Home(params) {
 
         </div>
     `;
+
+    const addListeners = null;
+    
+    // 2. Añadir los estilos desde un archivo externo
+    function addStyles(){
+        loadStyles('../css/home.css');
+    };
+    
+    function loadStyles(stylePath) {
+        // Verificar si ya hay un estilo cargado y eliminarlo
+        const existingLink = document.querySelector('link[data-dynamic-style]');
+        if (existingLink) {
+            existingLink.remove(); // Eliminar el estilo anterior
+        }
+    
+        // Crear un nuevo <link> para el archivo de estilos actual
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = stylePath;
+        link.setAttribute('data-dynamic-style', 'true'); // Marcador para identificar este estilo como dinámico
+        document.head.appendChild(link);
+    } 
+
+    return [view, addStyles, addListeners];
 }

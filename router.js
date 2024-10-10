@@ -12,39 +12,39 @@ import Error404 from './views/error404.js';
 const routes = [
     {
         path: '/',
-        view: Home
+        fn_view: Home
     },
     {
         path: '/about',
-        view: About
+        fn_view: About
     },
     {
         path: '/contact',
-        view: Contact
+        fn_view: Contact
     },
     {
         path: '/contact_hash',
-        view: Contact_hash
+        fn_view: Contact_hash
     },
     {
         path: '/user/',
-        view: User
+        fn_view: User
     },
     {
         path: '/user/:id',
-        view: User
+        fn_view: User
     },
     {
         path: '/user#id=:id&postId=:postId',
-        view: User
+        fn_view: User
     },
     {
         path: '/user/:id/post/:id_post',
-        view: User
+        fn_view: User
     },
     {
         path: '/404',
-        view: Error404
+        fn_view: Error404
     }
 ];
 
@@ -54,38 +54,18 @@ function navigateTo(url) {
     router();
 }
 
-// Router para manejar las rutas y cargar contenido dinámico
-async function old_router() {
-    const currentPath = window.location.pathname;
-
-    const parts = currentPath.split('/');
-
-    const hash = window.location.hash;
-
-    // Encontrar la ruta coincidente
-    let routeMatch = matchRoute(currentPath);
-
-    // Si no hay coincidencias, mostrar la página 404
-    if (!routeMatch) {
-        document.getElementById('content').innerHTML = `<h1>404</h1><p>Página no encontrada.</p>`;
-        return;
+function removeDynamicStyle(){
+    const existingLink = document.querySelector('link[data-dynamic-style]');
+    if (existingLink) {
+        existingLink.remove(); // Eliminar el estilo anterior
     }
-
-    // Obtener la vista correspondiente
-    const view = routeMatch.route.view;
-    console.log('view: ',view);
-    
-    
-    const view_html = await view(routeMatch.params)
-    console.log('view_html: ',view_html);
-
-    // Cargar la vista y pasarle parámetros
-    document.getElementById('content').innerHTML = view_html;
 }
 
 
 async function router() {
     console.log('=== function router() === ');
+
+    removeDynamicStyle();
    
     const currentPath = window.location.pathname;
     const currentHash = window.location.hash;//'#/aaa/bbb'
@@ -106,12 +86,12 @@ async function router() {
         console.log('error404: ',error404);
 
         // Obtener la vista correspondiente
-        const view = error404.view;
-        console.log('view: ',view);
+        const fn_view = error404.fn_view;
+        console.log('fn_view: ',fn_view);
 
         const params = {};
         
-        const view_html = await view(params);
+        const view_html = await fn_view(params);
         //console.log('view_html: ',view_html);
 
         document.getElementById('content').innerHTML = view_html;
@@ -119,16 +99,31 @@ async function router() {
     }
 
     // Obtener la vista correspondiente
-    const view = routeMatch.route.view;
-    //console.log('view: ',view);
-
+    const fn_view = routeMatch.route.fn_view;
+    //console.log('fn_view: ',fn_view);
     
     
-    const view_html = await view(routeMatch.params);
+    const [view_html, addStyles, addListeners] = await fn_view(routeMatch.params);
     //console.log('view_html: ',view_html);
+
 
     // Cargar la vista y pasarle parámetros
     document.getElementById('content').innerHTML = view_html;
+
+    // Añadir los listeners después de que el HTML esté en el DOM
+    if(addListeners){
+        console.log('[if] --- hay addListeners ');
+        addListeners();
+    }else{
+        console.log('[else] --- no hay addListeners ');
+    }
+
+    if(addStyles){
+        console.log('[if] --- hay addStyles ');
+        addStyles();
+    }else{
+        console.log('[else] --- no hay addStyles ');
+    }    
 }
 
 
@@ -293,5 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar la primera ruta
     router();
 });
+
+
+
 
 

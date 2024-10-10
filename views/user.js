@@ -66,7 +66,7 @@ export default async function User(params) {
         post = { postText: `Ya que el usuario es desconocido, no hay ningún post.`};
     }
     
-    return `
+    const view = `
         <div>
         
             <div class="container">
@@ -83,5 +83,9 @@ export default async function User(params) {
 
         </div>
     `;    
-
+    
+    const addListeners = null;
+    const addStyles = null;
+    
+    return [view, addListeners];
 }
