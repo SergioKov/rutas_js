@@ -150,7 +150,7 @@ footer {
 
 
 
-/*start contact */
+/* start contact */
 form {
     background-color: white;
     padding: 20px;
@@ -191,8 +191,6 @@ form button {
 form button:hover {
     background-color: #45a049;
 }
-
-
 
 .form-container {
     background-color: white;
@@ -254,7 +252,42 @@ textarea:not(:placeholder-shown) + label
     font-size: 12px;
     color: #4CAF50;
 }
+/* end contact */
 
 
+/* start about */
+.about-content {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
 
-/*end contact */
+.about-content h2 {
+    margin-bottom: 15px;
+    color: #4CAF50;
+}
+
+.about-content p {
+    margin-bottom: 15px;
+}
+
+.about-content img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.about-content ul {
+    margin-top: 15px;
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.about-content ul li {
+    margin-bottom: 10px;
+}
+
+/* end about */

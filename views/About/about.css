@@ -2,36 +2,3 @@ body{
     background: #ceface;
 }
 
-.about-content {
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.about-content h2 {
-    margin-bottom: 15px;
-    color: #4CAF50;
-}
-
-.about-content p {
-    margin-bottom: 15px;
-}
-
-.about-content img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-    border-radius: 5px;
-}
-
-.about-content ul {
-    margin-top: 15px;
-    list-style: disc;
-    padding-left: 20px;
-}
-
-.about-content ul li {
-    margin-bottom: 10px;
-}
