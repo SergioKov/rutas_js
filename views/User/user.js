@@ -1,8 +1,9 @@
 export default async function User(params) {
-    // Aquí params contiene el ID del usuario (params.id)
+    // Aquí params contiene el ID del usuario (params.userId)
+    console.log('=== async function User(params) ===');
     console.log(params);
 
-    const userId = params.id;
+    const userId = params.userId;
     const postId = params.postId;
     
 

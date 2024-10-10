@@ -31,15 +31,15 @@ const routes = [
         fn_view: User
     },
     {
-        path: '/user/:id',
+        path: '/user/:userId',
         fn_view: User
     },
     {
-        path: '/user#id=:id&postId=:postId',
+        path: '/user#userId=:userId&postId=:postId',
         fn_view: User
     },
     {
-        path: '/user/:id/post/:id_post',
+        path: '/user/:userId/post/:postId',
         fn_view: User
     },
     {
@@ -145,9 +145,11 @@ function matchRoute(currentPath, currentHash) {
         
         const pathParts = currentPath.split('/').filter(Boolean); // Divide el currentPath en partes y elimina vacíos
         console.log('pathParts: ', pathParts);
-
+        console.log(' ');
+        
         // Comprobación de longitud de partes
         if (routeParts.length !== pathParts.length) {
+            console.log('--- longitudes no coinciden, continúa al siguiente ');
             continue; // Si las longitudes no coinciden, continúa al siguiente
         }
 
@@ -175,9 +177,16 @@ function matchRoute(currentPath, currentHash) {
                     break;
 
                 case routePart === pathPart:
-                    console.log('switch --- Coinciden las partes. (routePart === pathPart)');
+                    console.log(`switch --- (${routePart} === ${pathPart}) --- Coinciden las partes.`);
                     matchFound = true; // Marca como encontrado si las partes coinciden
-                    let params_hash = getHashParams();
+                    let params_hash;
+                    if(currentHash.includes('/')){
+                        params_hash = getSlashParams();
+                        console.log('switch --- hay slash params. currentHash: ', currentHash);
+                    }else{
+                        params_hash = getHashParams();
+                        console.log('switch --- hay hash params. currentHash: ', currentHash);
+                    }
                     console.log('switch --- params_hash: ', params_hash);
                     params = params_hash;
                     break;
@@ -185,7 +194,7 @@ function matchRoute(currentPath, currentHash) {
                 default:
                     // Si no coincide, marca como no encontrado
                     matchFound = false;
-                    console.log('switch --- No coincide, marco como no encontrado. matchFound = false');
+                    console.log(`switch --- (${routePart} !== ${pathPart}) --- No coinciden, marco como no encontrado. matchFound = false`);
                     break;
             }
 
@@ -208,9 +217,9 @@ function matchRoute(currentPath, currentHash) {
 
 
 
-function setHashParams(id, postId) {
+function setHashParams(userId, postId) {
     // Establecer el hash en la URL
-    window.location.hash = `id=${id}&postId=${postId}`;
+    window.location.hash = `userId=${userId}&postId=${postId}`;
 }
 
 function getHashParams() {
@@ -218,16 +227,27 @@ function getHashParams() {
     const params = new URLSearchParams(hash); // Crear un objeto URLSearchParams
 
     // Obtener los valores de los parámetros
-    const id = params.get('id');
+    const userId = params.get('userId');
     const postId = params.get('postId');
 
-    return { id, postId };
+    return { userId, postId };
+}
+
+function getSlashParams() {
+    const hash = window.location.hash.slice(1); // Eliminar el símbolo '#'
+    const params = hash.split('/');//'#/2/1' => ['','2','1']
+
+    // Obtener los valores de los parámetros
+    const userId = params[1] || null;
+    const postId = params[2] || null;
+
+    return { userId, postId };
 }
 
 function displayHashParams() {
-    const { id, postId } = getHashParams();
+    const { userId, postId } = getHashParams();
     const output = document.getElementById('output');
-    output.textContent = `id: ${id}, postId: ${postId}`;
+    output.textContent = `userId: ${userId}, postId: ${postId}`;
 }
 
 

@@ -49,11 +49,13 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
             <li><a href="/contact" data-link>Contact</a></li>
             <li><a href="/contact_hash#/aaa" data-link>Contact_hash </a></li>
             <li><a href="/user" data-link>User</a></li>
-            <li><a href="/user#id=1" data-link>User 1</a></li>
-            <li><a href="/user#id=2" data-link>User 2 </a></li>
-            <li><a href="/user#id=2&postId=1" data-link>#User id:2 postId:1 </a></li>
-            <li><a href="/user#id=3&postId=2" data-link>#User id:3 postId:2 </a></li>
-            <li><a href="/user#id=4&postId=2" data-link>#User id:4 postId:2 </a></li>
+            <li><a href="/user#userId=1" data-link>User 1</a></li>
+            <li><a href="/user#userId=2" data-link>User 2 </a></li>
+            <li><a href="/user#userId=2&postId=1" data-link>#User userId:2 postId:1 </a></li>
+            <li><a href="/user#userId=3&postId=2" data-link>#User userId:3 postId:2 </a></li>
+            <li><a href="/user#userId=4&postId=2" data-link>#User userId:4 postId:2 </a></li>
+            <li><a href="/user#/2/1" data-link>#User #/2/1 </a></li>
+            <li><a href="/user#/3/2" data-link>#User #/3/2 </a></li>
         </ul>
     </nav>
 
