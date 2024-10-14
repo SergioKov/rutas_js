@@ -70,5 +70,6 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
     </footer>    
 
     <script type="module" src="./router.js"></script>
+    <script type="text/javascript" src="./js/my_js.js"></script>
 </body>
 </html>

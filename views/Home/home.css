@@ -2,3 +2,53 @@ body {
     /* background-color: #f4f4f4; */
     /* background-color: #fff6e6; */
 }
+
+
+.container-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+    /* height: 100px; */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+.item {
+    /* background-color: #4CAF50; */
+    height: 50px;
+    text-shadow: 0 0px 6px #000000;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: white;
+    font-size: 25px;
+}
+
+.flex-item {
+    flex: 1;
+    background: indigo;
+    color: white;
+    /* padding: 10px; */
+    transition: all 0.5s;
+    display: flex;
+    /* align-content: center; */
+    justify-content: center;
+    align-items: center;
+}
+.item.flex-item:hover {
+    /* flex: 1 1 10%; */
+    background: green;
+}
+
+.flex-item:nth-of-type(1) {
+    flex: 1;
+}
+
+.flex-item:nth-of-type(2) {
+    flex: 2;
+}
+
+.flex-item:nth-of-type(3) {
+    flex: 3;
+}

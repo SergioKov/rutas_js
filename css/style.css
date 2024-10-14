@@ -75,12 +75,15 @@ nav{
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    box-shadow: 0 .5rem 1.2rem rgba(0, 0, 0, .2);
 }
+
 .block{
     background-color: white; 
     border: 1px solid #ddd;
     padding: 20px;
-    border-radius: 5px;  
+    border-radius: 5px; 
+    box-shadow: 0 .5rem 1.2rem rgba(0, 0, 0, .2); 
 }
 
 .spisok {
@@ -97,6 +100,7 @@ nav{
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    box-shadow: 0 .5rem 1.2rem rgba(0, 0, 0, .2);
 }
 
 
