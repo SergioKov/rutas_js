@@ -22,6 +22,8 @@ header {
     justify-content: space-between;
     align-items: stretch;
     gap: 1rem;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 .header_logo {
     width: 30%;
@@ -41,8 +43,10 @@ header {
 }
 
 /* start nav */
-.wr_nav{
-    background: #555353; 
+.wr_nav {
+    background: #555353;
+    /* padding: 5px; */
+    width: 100%;
 }
 nav {
     background-color: #333;
@@ -121,9 +125,10 @@ nav a:hover{
 
 .container {
     display: flex;
-    margin: 20px;
+    margin: 20px auto;
     flex-direction: column;
     gap: 20px;
+    max-width: 1600px;
 }
 
 .sidebar {

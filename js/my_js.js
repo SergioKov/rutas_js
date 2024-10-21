@@ -102,16 +102,18 @@ main();
 window.onscroll = function() {
     
     const header = document.querySelector('header');
+    const wr_nav = document.querySelector('.wr_nav');
     const nav = document.getElementById('navbar');
     const content = document.querySelector('#content');
     const header_h = header.offsetHeight;
     const nav_h = nav.offsetHeight;
+    const wr_nav_h = wr_nav.offsetHeight;
 
     if (window.scrollY > header_h) {
-        nav.classList.add('fixed');
-        content.style.paddingTop = nav_h + 'px';
+        wr_nav.classList.add('fixed');
+        content.style.paddingTop = wr_nav_h + 'px';
     } else {
-        nav.classList.remove('fixed');
+        wr_nav.classList.remove('fixed');
         content.style = '';
     }
 
@@ -126,10 +128,6 @@ window.onscroll = function() {
     } else {
         toTopButton.classList.remove('visible'); // Oculta el botón
     }
-
-
-
-
 };
 
 function animateFadeIn(){
