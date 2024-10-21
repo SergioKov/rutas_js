@@ -18,9 +18,14 @@ header {
     text-align: center;
 }
 
+/* start nav */
 nav {
     background-color: #333;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    width: 100%;
 }
 
 nav ul {
@@ -53,13 +58,16 @@ nav a {
 nav a:hover{
     color:lightblue;
 }
-nav{
-    display: flex;
-    flex-direction: column;
-}
 
-#content{
+.fixed {
+    position: fixed;
+    top: 0;
+}
+/* end nav*/
+
+#content {
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .container {
@@ -295,3 +303,106 @@ textarea:not(:placeholder-shown) + label
 }
 
 /* end about */
+
+
+
+
+.elemento-a-animar {
+    opacity: 0;
+    transform: translateX(-100%) scale(0.2);
+    /* O translateX(100%) para que aparezca desde la derecha */
+    transition: all 1.5s ease-in-out;
+    /* Ajusta la duración y la curva de la transición */
+}
+.elemento-a-animar.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+
+
+.elemento-a-animar2 {
+    opacity: 0.5;
+    transform: translateY(100%) scale(0.2);
+    /* O translateX(100%) para que aparezca desde la derecha */
+    transition: all 1.5s ease-in-out;
+    /* Ajusta la duración y la curva de la transición */
+}
+.elemento-a-animar2.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+
+
+.elemento-a-animar3 {
+    opacity: 0.5;
+    transform: translateX(100%) scale(0.2);
+    /* O translateX(100%) para que aparezca desde la derecha */
+    transition: all 1.5s ease-in-out;
+    /* Ajusta la duración y la curva de la transición */
+}
+.elemento-a-animar3.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+
+
+/* Estilo general para el botón "volver al inicio" */
+.to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100px);
+    transition: all 0.45s ease-in-out;
+    font-size: 24px;
+    z-index: 1000;
+    text-decoration: none;
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.to-top i {
+    line-height: inherit;
+}
+
+.to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
+    
+}
+
+/* Efecto de scroll suave cuando se hace clic */
+html {
+    scroll-behavior: smooth;
+}
+
+.fa-angle-up:before {
+    content: "\f106";
+}
+[class*='fa-']:before {
+    font-weight: 400;
+    font-family: 'FontAwesome';
+}
+.fa {
+    display: inline-block;
+    font-family: 'FontAwesome';
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

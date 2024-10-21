@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // Obtener el nombre del host
 $host = $_SERVER['HTTP_HOST'];
@@ -23,16 +23,22 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rutas_JS</title>
     <link type="styleshirt" href="">
     <link rel="stylesheet" href="./css/style.css">
-<style>
 
-</style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+
+    </style>
 </head>
+
 <body>
 
     <!-- Header -->
@@ -42,7 +48,7 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
     </header>
 
     <!-- Menu de navegación -->
-    <nav>
+    <nav id="navbar">
         <ul>
             <li><a href="/" data-link>Home</a></li>
             <li><a href="/about" data-link>About</a></li>
@@ -64,12 +70,18 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
 
     </div>
 
+    <a href="#" id="toTop" class="to-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Mi SPA. Todos los derechos reservados.</p>
-    </footer>    
+    </footer>
 
     <script type="module" src="./router.js"></script>
     <script type="text/javascript" src="./js/my_js.js"></script>
 </body>
+
 </html>

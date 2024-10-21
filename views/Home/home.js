@@ -17,8 +17,8 @@ export default async function Home(params) {
 
     // Reemplazar los marcadores de posición con las variables
     htmlContent = htmlContent
-        .replace('${welcomeMessage}', welcomeMessage)
-        .replace('${params_html}', params_html)
+        .replaceAll('${welcomeMessage}', welcomeMessage)
+        .replaceAll('${params_html}', params_html)
     ;
 
     const view = htmlContent;

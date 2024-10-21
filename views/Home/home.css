@@ -52,3 +52,11 @@ body {
 .flex-item:nth-of-type(3) {
     flex: 3;/* Ocupa 3 partes del espacio disponible */
 }
+
+
+/* test fontawesome */
+.icon {
+    font-size: 30px;
+    margin: 10px;
+    color: #4caf50;
+}

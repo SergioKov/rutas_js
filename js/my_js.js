@@ -99,6 +99,77 @@ async function main(){
 main();
 
 
+window.onscroll = function() {
+    
+    const header = document.querySelector('header');
+    const nav = document.getElementById('navbar');
+    const content = document.querySelector('#content');
+    const header_h = header.offsetHeight;
+    const nav_h = nav.offsetHeight;
+
+    if (window.scrollY > header_h) {
+        nav.classList.add('fixed');
+        content.style.paddingTop = nav_h + 'px';
+    } else {
+        nav.classList.remove('fixed');
+        content.style = '';
+    }
+
+    animateFadeIn();
+
+
+    const toTopButton = document.getElementById('toTop');
+
+    // Si el usuario ha hecho scroll hacia abajo más de 200 píxeles
+    if (window.scrollY > 150) {
+        toTopButton.classList.add('visible'); // Muestra el botón
+    } else {
+        toTopButton.classList.remove('visible'); // Oculta el botón
+    }
+
+
+
+
+};
+
+function animateFadeIn(){
+    
+    const elemento = document.querySelector('.elemento-a-animar');
+    if(elemento){
+        //const distanciaDesdeLaParteSuperior = elemento.offsetTop;
+        if (window.scrollY > elemento.offsetTop - window.innerHeight) {
+            elemento.classList.add('visible');
+        }else{
+            //elemento.classList.remove('visible');
+        }
+    }
+    
+    const elemento2 = document.querySelector('.elemento-a-animar2');
+    if(elemento2){
+        if (window.scrollY > elemento2.offsetTop - window.innerHeight) {
+            elemento2.classList.add('visible');
+        }else{
+            //elemento2.classList.remove('visible');
+        }
+    }    
+
+    const elemento3 = document.querySelector('.elemento-a-animar3');
+    if(elemento3){
+        if (window.scrollY > elemento3.offsetTop - window.innerHeight) {
+            elemento3.classList.add('visible');
+        }else{
+            //elemento2.classList.remove('visible');
+        }
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
