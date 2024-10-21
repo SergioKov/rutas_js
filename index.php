@@ -63,38 +63,40 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
     </header>
 
     <!-- Menu de navegación -->
-    <nav id="navbar">
-        <ul>
-            <li><a id="m_btn_menu" href="#" data-menu><i class="fa fa-solid fa-bars"></i></a></li>
-            <li class="d-none"><a href="/" data-menu><i class="fa fa-solid fa-filter"></i></a></li>
-            <li class="d-none"><a href="/" data-menu><i class="fa fa-tres-puntos-vertical"></i></a></li>
-            
-            <div id="menu_fondo"></div>
+    <div class="wr_nav">
+        <nav id="navbar">
+            <ul>
+                <li><a id="m_btn_menu" href="#" data-menu><i class="fa fa-solid fa-bars"></i></a></li>
+                <li class="d-none"><a href="/" data-menu><i class="fa fa-solid fa-filter"></i></a></li>
+                <li class="d-none"><a href="/" data-menu><i class="fa fa-tres-puntos-vertical"></i></a></li>
+                
+                <div id="menu_fondo"></div>
 
-            <div id="wr_links">
-                <div class="wr_links_inner">
-                    <div id="menu_head">
-                        <a class="link_close" href="#" onclick=""><i class="fa-solid fa-arrow-left"></i></a>
-                        <a class="link_close" href="#" onclick=""><i class="fa-solid fa-xmark"></i></a>
+                <div id="wr_links">
+                    <div class="wr_links_inner">
+                        <div id="menu_head">
+                            <a class="link_close" href="#" onclick=""><i class="fa-solid fa-arrow-left"></i></a>
+                            <a class="link_close" href="#" onclick=""><i class="fa-solid fa-xmark"></i></a>
+                        </div>
+                        <li><a href="/" data-link>Home</a></li>
+                        <li><a href="/about" data-link>About</a></li>
+                        <li><a href="/contact" data-link>Contact</a></li>
+                        <li><a href="/contact_hash#/aaa" data-link>Contact_hash </a></li>
+                        <li><a href="/user" data-link>User</a></li>
+                        <li><a href="/user#userId=1" data-link>User 1</a></li>
+                        <li><a href="/user#userId=2" data-link>User 2 </a></li>
+                        <li><a href="/user#userId=2&postId=1" data-link>#User userId:2 postId:1 </a></li>
+                        <li><a href="/user#userId=3&postId=2" data-link>#User userId:3 postId:2 </a></li>
+                        <li><a href="/user#userId=4&postId=2" data-link>#User userId:4 postId:2 </a></li>
+                        <li><a href="/user#/2/1" data-link>#User #/2/1 </a></li>
+                        <li><a href="/user#/3/2" data-link>#User #/3/2 </a></li>
                     </div>
-                    <li><a href="/" data-link>Home</a></li>
-                    <li><a href="/about" data-link>About</a></li>
-                    <li><a href="/contact" data-link>Contact</a></li>
-                    <li><a href="/contact_hash#/aaa" data-link>Contact_hash </a></li>
-                    <li><a href="/user" data-link>User</a></li>
-                    <li><a href="/user#userId=1" data-link>User 1</a></li>
-                    <li><a href="/user#userId=2" data-link>User 2 </a></li>
-                    <li><a href="/user#userId=2&postId=1" data-link>#User userId:2 postId:1 </a></li>
-                    <li><a href="/user#userId=3&postId=2" data-link>#User userId:3 postId:2 </a></li>
-                    <li><a href="/user#userId=4&postId=2" data-link>#User userId:4 postId:2 </a></li>
-                    <li><a href="/user#/2/1" data-link>#User #/2/1 </a></li>
-                    <li><a href="/user#/3/2" data-link>#User #/3/2 </a></li>
                 </div>
-            </div>
 
-        </ul>
+            </ul>
 
-    </nav>
+        </nav>
+    </div>
 
     <div id="content">
 

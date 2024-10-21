@@ -41,6 +41,9 @@ header {
 }
 
 /* start nav */
+.wr_nav{
+    background: #555353; 
+}
 nav {
     background-color: #333;
     overflow: hidden;
@@ -48,6 +51,8 @@ nav {
     flex-direction: column;
     z-index: 2;
     width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 nav ul {
