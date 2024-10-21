@@ -256,10 +256,33 @@ function displayHashParams() {
 // Escuchar clics en enlaces con `data-link`
 document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', e => {
+        
+        console.log('--- click sobre body---');
+        
+        
+        //Click sobre el logo img de Header
+        if (e.target.parentElement.matches('[data-link]')) {
+            e.preventDefault();
+            console.log('cliked logo. Navegando a: ', e.target.parentElement.href); // Agrega este log para depurar
+            navigateTo(e.target.parentElement.href);
+
+            closeMenu();
+        }
+        
+
+        //Click sobre los links de Menú
         if (e.target.matches('[data-link]')) {
             e.preventDefault();
             console.log('Navegando a: ', e.target.href); // Agrega este log para depurar
             navigateTo(e.target.href);
+
+            closeMenu();
+        }
+
+        //Click sobre cerrar Menu y Flecha '<-'
+        if(e.target.id === 'wr_links' || e.target.parentElement.className === 'link_close'){
+            console.log('clicked wr_links or link_close');
+            closeMenu();
         }
     });
 

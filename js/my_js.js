@@ -164,6 +164,38 @@ function animateFadeIn(){
 }
 
 
+const m_btn_menu = document.getElementById('m_btn_menu');
+const wr_links = document.getElementById('wr_links');
+const menu_fondo = document.getElementById('menu_fondo');
+const parte_transp = document.getElementById('parte_transp');
+
+function closeMenu(){ 
+    menu_fondo.classList.remove('visible');
+    wr_links.classList.remove('visible');
+    setTimeout(()=>{
+        //wr_links.classList.remove('fadeIn');
+    },1000)  
+}
+
+function openMenu(){    
+    menu_fondo.classList.add('visible');
+    wr_links.classList.add('visible');
+    setTimeout(()=>{
+        //wr_links.classList.add('fadeIn');
+    },300)
+}
+
+m_btn_menu.addEventListener('click',(e)=>{
+    e.preventDefault();
+    openMenu();
+});
+
+const link_closeAll = document.querySelectorAll('.link_close');
+link_closeAll.forEach(link => {
+    link.addEventListener('click', e => {
+        //closeMenu();
+    });
+});
 
 
 
