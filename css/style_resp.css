@@ -36,7 +36,7 @@
 
 
 
-/* de 768 a 1200 y mas */
+/*  MOBILKA */
 @media screen and (min-width: 0px) and (max-width: 767px) {
     
     #wr_links li {
@@ -52,13 +52,17 @@
         width: 100%;
     }
 
+    header,
+    .search_icon
+    {
+        display: none;
+    }
+
+}/* end MOBILKA - min-width: 0 - 767px */
 
 
-}/* end min-width: 0 - 767px */
 
-
-
-/* de 768 a 1200 y mas */
+/* DESKTOP - de 768 a 1200 y mas  */
 @media screen and (min-width: 768px) {
     
     nav ul a[data-menu]{
@@ -67,8 +71,10 @@
     nav ul a[data-link]{
         display: block;
     }
+
+    .gr_menu,
     #m_btn_menu,
-    #menu_fondo
+    #menu_fondo.search_icon
     {
         display: none;
     }
@@ -84,6 +90,7 @@
         height: auto;
         flex-direction: row;
         width: 100%;
+        justify-content: space-between;
     }
     #menu_head{
         display: none;
@@ -91,4 +98,14 @@
 
 
 
-}/* end min-width: 768px */
+}/* end DESKTOP - min-width: 768px */
+
+
+
+
+
+
+
+
+
+

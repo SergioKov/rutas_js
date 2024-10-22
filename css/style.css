@@ -44,7 +44,7 @@ header {
 
 /* start nav */
 #wr_nav {
-    background: #555353;
+    background: #333;
     /* padding: 5px; */
     width: 100%;
 }
@@ -93,20 +93,61 @@ nav ul li a:hover {
 nav a { 
     text-decoration: none; 
     color: blue;
-    transition: 0.3s; 
+    transition: 0.3s;
+    position: relative; 
 }
 nav a:hover{
     color:lightblue;
 }
 
+a.active::before {
+    content: '';
+    /* El pseudo-elemento no tiene contenido */
+    position: absolute;
+    left: 0;
+    top: 0px;
+    /* Ajusta esta distancia para que esté justo debajo del texto */
+    width: 100%;
+    /* La línea será tan ancha como el enlace */
+    height: 5px;
+    /* Grosor de la línea */
+    background-color: #ffffff;
+    /* Color de la línea */
+    transition: 0.3s ease-in-out;
+    width: 100%;
+    /* Inicialmente la línea no es visible */
+    background: transparent;
+}
+
+a.active::after {
+    content: '';
+    /* El pseudo-elemento no tiene contenido */
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    /* Ajusta esta distancia para que esté justo debajo del texto */
+    width: 100%;
+    /* La línea será tan ancha como el enlace */
+    height: 5px;
+    /* Grosor de la línea */
+    background-color: #ffffff;
+    /* Color de la línea */
+    transition: 0.3s ease-in-out;
+    width: 100%;
+    /* Inicialmente la línea no es visible */
+
+}
+
 #m_btn_menu {
-    padding: 10px 17px;
     /* background: red; */
+    padding: 10px 17px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 55px;
     height: 44px;
+    text-decoration: none;
+    color: white;
 }
 #m_btn_menu i {
     font-size: 24px;
@@ -567,4 +608,163 @@ html {
 }
 .d-none{
     display: none;
+}
+.active {
+    background: #4caf50;
+}
+
+
+
+
+
+
+
+
+
+
+.gr_menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    /* flex-direction: row; */
+    color: white;
+    gap: 1rem;
+    /* background: green; */
+    /* width: 100%; */
+    color: white;
+    /* padding: 8px; */
+}
+.wr_m_logo {
+    display: flex;
+}
+.flex_1 {
+    display: flex;
+    gap: 1rem;
+    padding: 8px;
+    align-items: center;
+    justify-content: flex-start;
+}
+.flex_2 {
+    background: red;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.flex_3 {
+    /* background: purple; */
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px;
+}
+
+
+
+/* Estilo básico para el ícono del menú */
+.menu-icon {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-icon span {
+    display: block;
+    height: 4px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    /* transition: transform .3s ease, opacity .3s ease, width .3s; */
+    transition: .3s;
+}
+
+/* Espacio entre las líneas */
+.menu-icon span+span {
+    margin-top: 5px;
+}
+
+/* Al hacer clic en el menú (cuando se añade la clase 'active' se convierte en X) */
+.menu-icon.m_active_x span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+    /* Gira la primera línea */
+}
+.menu-icon.m_active_x span:nth-child(2) {
+    opacity: 0;
+    /* Oculta la línea del medio */
+}
+.menu-icon.m_active_x span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+    /* Gira la tercera línea */
+}
+
+
+
+/* Al hacer clic en el menú (cuando se añade la clase 'active' se convierte en flecha_izda ) */
+.menu-icon.m_active_flecha_left span:nth-child(1) {
+    transform: translateX(-1px) translateY(4px) rotate(-40deg);
+    width: 15px;
+}
+.menu-icon.m_active_flecha_left span:nth-child(2) {
+    opacity: 1;
+    width: 25px;
+}
+.menu-icon.m_active_flecha_left span:nth-child(3) {
+    transform: translateX(-1px) translateY(-4px) rotate(40deg);
+    width: 15px;
+}
+
+
+
+.menu-icon.m_active_flecha_left span
+{
+    transform: rotate(180deg);
+    transition: 0.3s;
+}
+
+
+
+
+
+.gr_menu_search_icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    font-size: 26px;
+    line-height: 48px;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+.lin-icon {
+    width: auto;
+    height: 1em;
+    fill: currentColor;
+}
+svg {
+    vertical-align: middle;
+}
+
+.search_icon {
+    padding: 17px;
+    /* width: 52px; */
+    /* height: 52px; */
+    /* background: red; */
+    display: flex;
+    color: white;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    font-size: 20px;
 }

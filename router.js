@@ -27,7 +27,7 @@ const routes = [
         fn_view: Contact_hash
     },
     {
-        path: '/user/',
+        path: '/user',
         fn_view: User
     },
     {
@@ -59,6 +59,26 @@ function removeDynamicStyle(){
     if (existingLink) {
         existingLink.remove(); // Eliminar el estilo anterior
     }
+}
+
+function pintarActivLink(path){
+    const linksAll = document.querySelectorAll('[data-link]:not(.header_logo a[data-link])');
+    let link_marcado = false;
+
+    linksAll.forEach(link => {
+        let a_href = link.getAttribute('href').split('#')[0];
+        console.log('link: ', link);
+        console.log('a_href: ', a_href);
+        console.log('path: ', path);
+
+        if(a_href === path && !link_marcado){
+            link.classList.add('active');
+            link_marcado = true;
+            console.log(link);
+        }else{
+            link.classList.remove('active');
+        }
+    });
 }
 
 
@@ -118,9 +138,13 @@ async function router() {
     }else{
         console.log('[else] --- no hay addStyles ');
     }
-
     //2. Cargar la vista y pasarle parámetros
     document.getElementById('content').innerHTML = view_html;
+    
+    //2.1 añadir efecto de fadeIn de los divs que lo tienen
+    setTimeout(()=>{
+        animateFadeIn();
+    },100);
 
     //3. Añadir los listeners después de que el HTML esté en el DOM
     if(addListeners){
@@ -157,6 +181,7 @@ function matchRoute(currentPath, currentHash) {
         let matchFound = false; // Inicializa matchFound como false
 
         if(currentPath === '/'){
+            pintarActivLink(currentPath);
             return { route, params }; // Retorna la ruta y los parámetros encontrados (vacios)
         }
 
@@ -182,10 +207,10 @@ function matchRoute(currentPath, currentHash) {
                     let params_hash;
                     if(currentHash.includes('/')){
                         params_hash = getSlashParams();
-                        //console.log('switch --- hay slash params. currentHash: ', currentHash);
+                        console.log('switch --- hay slash params. currentHash: ', currentHash);
                     }else{
                         params_hash = getHashParams();
-                        //console.log('switch --- hay hash params. currentHash: ', currentHash);
+                        console.log('switch --- hay hash params. currentHash: ', currentHash);
                     }
                     //console.log('switch --- params_hash: ', params_hash);
                     params = params_hash;
@@ -207,6 +232,7 @@ function matchRoute(currentPath, currentHash) {
 
         if (matchFound) {
             console.log('--- return: ', { route, params });
+            pintarActivLink(route.path);
             return { route, params }; // Retorna la ruta y los parámetros encontrados
         }
     }// end for outer
@@ -254,7 +280,9 @@ function displayHashParams() {
 
 
 // Escuchar clics en enlaces con `data-link`
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {    
+    
+    
     document.body.addEventListener('click', e => {
         
         console.log('--- click sobre body---');

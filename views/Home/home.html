@@ -5,6 +5,16 @@
             <h1>Home</h1>
             <p>${welcomeMessage}</p>
             <p>params: ${params_html}</p>
+            
+            <p>Links: <br>
+                <li><a href="/user#userId=1" data-link>User 1</a></li>
+                <li><a href="/user#userId=2" data-link>User 2 </a></li>
+                <li><a href="/user#userId=2&postId=1" data-link>#User userId:2 postId:1 </a></li>
+                <li><a href="/user#userId=3&postId=2" data-link>#User userId:3 postId:2 </a></li>
+                <li><a href="/user#userId=4&postId=2" data-link>#User userId:4 postId:2 </a></li>
+                <li><a href="/user#/2/1" data-link>#User #/2/1 </a></li>
+                <li><a href="/user#/3/2" data-link>#User #/3/2 </a></li>
+            </p>
         </div>
     
         <aside class="sidebar">

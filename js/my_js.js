@@ -127,7 +127,8 @@ window.onscroll = function() {
 };
 
 function animateFadeIn(){
-    
+    console.log('=== function animateFadeIn() ===');
+
     const elemento = document.querySelector('.elemento-a-animar');
     if(elemento){
         //const distanciaDesdeLaParteSuperior = elemento.offsetTop;
@@ -167,11 +168,12 @@ function closeMenu(){
     menu_fondo.classList.remove('visible');
     wr_links.classList.remove('visible');
     setTimeout(()=>{
-        //wr_links.classList.remove('fadeIn');
+        menu_fondo.classList.add('d-none');
     },1000)  
 }
 
 function openMenu(){    
+    menu_fondo.classList.remove('d-none');
     menu_fondo.classList.add('visible');
     wr_links.classList.add('visible');
     setTimeout(()=>{
