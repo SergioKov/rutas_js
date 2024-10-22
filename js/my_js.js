@@ -72,19 +72,16 @@ async function getProduct(id){
 async function main(){
     const { products } = await getAllProducts();
     //console.log(products);
-
     
     const res = await Promise.all([
         getProduct(1),
         getProduct(2),
         getProduct(3),
     ]);
-    console.log(res);
-    
+    //console.log(res);    
 
     const res2 = await Promise.all( products.map(product => getProduct(product.id)));
-
-    console.log(res2);
+    //console.log(res2);
 
     /*for (const product of products){
         
@@ -102,7 +99,7 @@ main();
 window.onscroll = function() {
     
     const header = document.querySelector('header');
-    const wr_nav = document.querySelector('.wr_nav');
+    const wr_nav = document.getElementById('wr_nav');
     const nav = document.getElementById('navbar');
     const content = document.querySelector('#content');
     const header_h = header.offsetHeight;
@@ -118,7 +115,6 @@ window.onscroll = function() {
     }
 
     animateFadeIn();
-
 
     const toTopButton = document.getElementById('toTop');
 

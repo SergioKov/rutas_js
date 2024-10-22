@@ -138,18 +138,18 @@ function matchRoute(currentPath, currentHash) {
     console.log('=== function matchRoute(currentPath) === ');
 
     for (const route of routes) {
-        console.log('route: ', route);
+        //console.log('route: ', route);
         
         const routeParts = route.path.split('/').filter(Boolean); // Divide la ruta en partes y elimina vacíos
-        console.log('routeParts: ', routeParts);
+        //console.log('routeParts: ', routeParts);
         
         const pathParts = currentPath.split('/').filter(Boolean); // Divide el currentPath en partes y elimina vacíos
-        console.log('pathParts: ', pathParts);
-        console.log(' ');
+        //console.log('pathParts: ', pathParts);
+        //console.log(' ');
         
         // Comprobación de longitud de partes
         if (routeParts.length !== pathParts.length) {
-            console.log('--- longitudes no coinciden, continúa al siguiente ');
+            //console.log('--- longitudes no coinciden, continúa al siguiente ');
             continue; // Si las longitudes no coinciden, continúa al siguiente
         }
 
@@ -162,17 +162,17 @@ function matchRoute(currentPath, currentHash) {
 
         for (let i = 0; i < routeParts.length; i++) {
             const routePart = routeParts[i];
-            console.log('en for --- routePart: ', routePart);
+            //console.log('en for --- routePart: ', routePart);
             
             const pathPart = pathParts[i];
-            console.log('en for --- pathPart: ', pathPart);
+            //console.log('en for --- pathPart: ', pathPart);
 
             switch (true) {
                 case routePart.startsWith(':'):
                     // Es un parámetro, guarda su valor
                     const paramName = routePart.slice(1); // Extrae el nombre del parámetro. ':id' => 'id'
                     params[paramName] = pathPart; // Asigna el valor al objeto de parámetros
-                    console.log('switch --- empieza por [:]. paramName: ', paramName);
+                    //console.log('switch --- empieza por [:]. paramName: ', paramName);
                     matchFound = true; // Marca como encontrado si hay un parámetro
                     break;
 
@@ -182,25 +182,25 @@ function matchRoute(currentPath, currentHash) {
                     let params_hash;
                     if(currentHash.includes('/')){
                         params_hash = getSlashParams();
-                        console.log('switch --- hay slash params. currentHash: ', currentHash);
+                        //console.log('switch --- hay slash params. currentHash: ', currentHash);
                     }else{
                         params_hash = getHashParams();
-                        console.log('switch --- hay hash params. currentHash: ', currentHash);
+                        //console.log('switch --- hay hash params. currentHash: ', currentHash);
                     }
-                    console.log('switch --- params_hash: ', params_hash);
+                    //console.log('switch --- params_hash: ', params_hash);
                     params = params_hash;
                     break;
 
                 default:
                     // Si no coincide, marca como no encontrado
                     matchFound = false;
-                    console.log(`switch --- (${routePart} !== ${pathPart}) --- No coinciden, marco como no encontrado. matchFound = false`);
+                    //console.log(`switch --- (${routePart} !== ${pathPart}) --- No coinciden, marco como no encontrado. matchFound = false`);
                     break;
             }
 
             // Si no hay coincidencia, salimos del bucle
             if (!matchFound) {
-                console.log('--- No hay coincidencia, salimos del bucle');
+                //console.log('--- No hay coincidencia, salimos del bucle');
                 break;
             }
         }// end for inner
@@ -281,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Click sobre cerrar Menu y Flecha '<-'
         if(e.target.id === 'wr_links' || e.target.parentElement.className === 'link_close'){
+            e.preventDefault();
             console.log('clicked wr_links or link_close');
             closeMenu();
         }

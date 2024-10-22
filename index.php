@@ -63,7 +63,7 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
     </header>
 
     <!-- Menu de navegación -->
-    <div class="wr_nav">
+    <div id="wr_nav">
         <nav id="navbar">
             <ul>
                 <li><a id="m_btn_menu" href="#" data-menu><i class="fa fa-solid fa-bars"></i></a></li>
