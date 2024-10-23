@@ -46,7 +46,7 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
         <div id="header_inner">
             <div class="header_logo">
                 <a href="/" data-link>
-                    <img src="./images/logo_js_react.png">
+                    <img src="./images/react_js.png">
                 </a>
             </div>
 
@@ -78,7 +78,7 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
                 </div>
 
                 <div class="wr_m_logo">
-                    <img src="./images/logo_js_react.png" style="max-width: 100px;">
+                    <img src="./images/react_js.png" style="max-width: 100px;">
                 </div>
             </div>
 
