@@ -3,6 +3,7 @@ console.log('es router.js');
 // Importar las vistas
 import Home from './views/Home/home.js';
 import About from './views/About/about.js';
+import Category from './views/Category/category.js';
 import Contact from './views/Contact/contact.js';
 import Contact_hash from './views/Contact_hash/contact_hash.js';
 import User from './views/User/user.js';
@@ -11,7 +12,71 @@ import Error404 from './views/Error404/error404.js';
 // Rutas configuradas con sus respectivas vistas
 const routes = [
     {
-        path: '/',
+        ej: '/',
+        path: /^\/$/, // Ruta principal '/'
+        fn_view: Home
+    },
+    {
+        ej: '/home',
+        path: /^\/home$/, // Ruta principal '/home'
+        fn_view: Home
+    },
+    {
+        ej: '/about',
+        path: /^\/about$/, // Ruta estática para "/about"
+        fn_view: About
+    },
+    {
+        ej: '/category',
+        path: /^\/category$/, // Ruta estática para "/category"
+        fn_view: Category
+    },
+    {
+        ej: '/category/',
+        path: /^\/category\/$/, // Ruta estática para "/category/"
+        fn_view: Category
+    },
+    {
+        ej: '/category/:categoryName',
+        path: /^\/category\/([^/]+)$/, // Ruta dinámica para "/category/:categoryName"
+        fn_view: Category
+    },
+    {
+        ej: '/category/:categoryName/:otra_var',
+        path: /^\/category\/([^/]+)\/([^/]+)$/, // Ruta dinámica para "/category/:categoryName/:otra_var"
+        fn_view: Category
+    },
+    {
+        ej: '/category/:categoryName/user/:id',
+        path: /^\/category\/([^/]+)\/user\/([^/]+)$/, // Ruta dinámica para "/category/:categoryName/user/:id"
+        fn_view: Category
+    },
+    {
+        ej: '/user/:id',
+        path: /^\/user\/([^/]+)$/, // Ruta dinámica para "/user/:id"
+        fn_view: User
+    },
+    {
+        ej: '/user/:id/post/:postId',
+        path: /^\/user\/([^/]+)\/post\/([^/]+)$/, // Ruta para "/user/:id/post/:postId"
+        fn_view: User
+    },
+    {
+        ej: '/404',
+        path: /^\/404$/, // Ruta para 404
+        fn_view: Error404
+    }
+ 
+];
+
+
+const antes_routes = [
+    {
+        path: '/',//antes
+        fn_view: Home
+    },
+    {
+        path: '/home',
         fn_view: Home
     },
     {
@@ -82,19 +147,25 @@ function pintarActivLink(path){
 }
 
 
+
+
+
+
 async function router() {
     console.log('=== function router() === ');
 
     removeDynamicStyle();
    
-    const currentPath = window.location.pathname;
+    const currentPath = window.location.pathname;//'/user/123'
     const currentHash = window.location.hash;//'#/aaa/bbb'
 
     // Encontrar la ruta coincidente
-    let routeMatch = matchRoute(currentPath, currentHash);
+    // let routeMatch = matchRoute(currentPath, currentHash);
+    let routeMatch = new_route(currentPath);
     console.log('routeMatch: ',routeMatch);
 
     if(routeMatch){
+        console.log('routeMatch.route: ',routeMatch.route);
         console.log('routeMatch.params: ',routeMatch.params);
     }
 
@@ -102,7 +173,7 @@ async function router() {
     // Si no hay coincidencias, mostrar la página 404
     if (!routeMatch) {
         // Obtener la vista correspondiente
-        const error404 = routes.find(r => r.path === '/404');
+        const error404 = routes.find(r => r.path.test('/404'));
         console.log('error404: ',error404);
 
         // Obtener la vista correspondiente
@@ -138,6 +209,7 @@ async function router() {
     }else{
         console.log('[else] --- no hay addStyles ');
     }
+
     //2. Cargar la vista y pasarle parámetros
     document.getElementById('content').innerHTML = view_html;
     
@@ -153,8 +225,43 @@ async function router() {
     }else{
         console.log('[else] --- no hay addListeners ');
     }
-    
+
 }
+
+
+
+function new_route(currentPath) {
+    console.log('=== function new_route() ===');
+
+    const url = currentPath;
+    const route = routes.find(r => r.path.test(url)); // Encuentra la primera ruta que coincida con la URL actual
+    console.log('route: ', route);
+
+    if(route) {
+        const match = url.match(route.path); // Extrae los parámetros de la URL
+        console.log('match: ', match);
+
+        let match_sliced = match.slice(1);//'match_sliced' es un array de los 'params' para la funcion handler()
+        console.log('match_sliced: ', match_sliced);
+        
+        let params = [];
+        
+        if(currentPath === '/'){
+            pintarActivLink(currentPath);
+            return { route, params }; // Retorna la ruta y los parámetros encontrados (vacios)
+        }        
+        
+        params = match_sliced;
+        console.log('params: ', params);
+        
+        return { route, params }; // Retorna la ruta y los parámetros encontrados
+    }else{
+        //navigateTo('/404'); // Si no se encuentra la ruta, redirige a 404
+        return null;
+    }
+}
+
+
 
 
 // Función para hacer coincidir la ruta con las configuradas (incluye rutas dinámicas)
@@ -239,6 +346,9 @@ function matchRoute(currentPath, currentHash) {
 
     return null; // Si no se encuentra ninguna coincidencia
 }
+
+
+
 
 
 

@@ -28,8 +28,8 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rutas_JS</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/style_resp.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style_resp.css">
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -46,7 +46,7 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
         <div id="header_inner">
             <div class="header_logo">
                 <a href="/" data-link>
-                    <img src="./images/react_js.png">
+                    <img src="/images/react_js.png">
                 </a>
             </div>
 
@@ -78,7 +78,7 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
                 </div>
 
                 <div class="wr_m_logo">
-                    <img src="./images/react_js.png" style="max-width: 100px;">
+                    <img src="/images/react_js.png" style="max-width: 100px;">
                 </div>
             </div>
 
@@ -121,9 +121,15 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
                     <ul>
                         <li><a href="/" data-link>Home</a></li>
                         <li><a href="/about" data-link>About</a></li>
+                        <li><a href="/category" data-link>Category</a></li>
+                        <li><a href="/category/technology" data-link>Category:name</a></li>
+                        <li><a href="/category/technology/otra_var" data-link>Category:name:otra_var</a></li>
+                        <li><a href="/category/technology/user/2" data-link>Category:name/user:2</a></li>
                         <li><a href="/contact" data-link>Contact</a></li>
                         <li><a href="/contact_hash#/aaa" data-link>Contact_hash </a></li>
                         <li><a href="/user" data-link>User</a></li>
+                        <li><a href="/user/2/post/1" data-link>#User #/2/1 </a></li>
+                        <li><a href="/user/3/post/2" data-link>#User #/3/2 </a></li>
                         <!--
                             <li><a href="/user#userId=1" data-link>User 1</a></li>
                             <li><a href="/user#userId=2" data-link>User 2 </a></li>
@@ -163,8 +169,8 @@ $currentFilePath = $_SERVER['SCRIPT_FILENAME'];
         <p>&copy; 2024 Mi SPA. Todos los derechos reservados.</p>
     </footer>
 
-    <script type="module" src="./router.js"></script>
-    <script type="text/javascript" src="./js/my_js.js"></script>
+    <script type="module" src="/router.js"></script>
+    <script type="text/javascript" src="/js/my_js.js"></script>
 </body>
 
 </html>

@@ -181,10 +181,12 @@ function openMenu(){
     },300)
 }
 
-m_btn_menu.addEventListener('click',(e)=>{
-    e.preventDefault();
-    openMenu();
-});
+if(m_btn_menu){
+    m_btn_menu.addEventListener('click',(e)=>{
+        e.preventDefault();
+        openMenu();
+    });
+}
 
 const link_closeAll = document.querySelectorAll('.link_close');
 link_closeAll.forEach(link => {
