@@ -12,61 +12,65 @@ import Error404 from './views/Error404/error404.js';
 // Rutas configuradas con sus respectivas vistas
 const routes = [
     {
-        ej: '/',
-        path: /^\/$/, // Ruta principal '/'
+        ej: '/',//Ruta principal
+        path: /^\/$/,
         fn_view: Home
     },
     {
-        ej: '/home',
-        path: /^\/home$/, // Ruta principal '/home'
+        ej: '/home',//Ruta principal
+        path: /^\/home$/,
         fn_view: Home
     },
     {
-        ej: '/about',
-        path: /^\/about$/, // Ruta estática para "/about"
+        ej: '/about',//Ruta estática
+        path: /^\/about$/,
         fn_view: About
     },
     {
-        ej: '/category',
-        path: /^\/category$/, // Ruta estática para "/category"
+        ej: '/category',//Ruta estática
+        path: /^\/category$/,
         fn_view: Category
     },
     {
-        ej: '/category/',
-        path: /^\/category\/$/, // Ruta estática para "/category/"
+        ej: '/category/',//Ruta estática con '/' al final
+        path: /^\/category\/$/,
         fn_view: Category
     },
     {
-        ej: '/category/:categoryName',
-        path: /^\/category\/([^/]+)$/, // Ruta dinámica para "/category/:categoryName"
+        ej: '/contact',//Ruta estática
+        path: /^\/contact$/,
+        fn_view: Contact
+    },
+    {
+        ej: '/category/:categoryName',//Ruta dinámica
+        path: /^\/category\/([^/]+)$/,
         fn_view: Category
     },
     {
-        ej: '/category/:categoryName/:otra_var',
-        path: /^\/category\/([^/]+)\/([^/]+)$/, // Ruta dinámica para "/category/:categoryName/:otra_var"
+        ej: '/category/:categoryName/:otra_var',//Ruta dinámica
+        path: /^\/category\/([^/]+)\/([^/]+)$/,
         fn_view: Category
     },
     {
-        ej: '/category/:categoryName/user/:id',
-        path: /^\/category\/([^/]+)\/user\/([^/]+)$/, // Ruta dinámica para "/category/:categoryName/user/:id"
+        ej: '/category/:categoryName/user/:id',//Ruta dinámica
+        path: /^\/category\/([^/]+)\/user\/([^/]+)$/,
         fn_view: Category
     },
     {
         ej: '/user/:id',
-        path: /^\/user\/([^/]+)$/, // Ruta dinámica para "/user/:id"
+        path: /^\/user\/([^/]+)$/,//Ruta dinámica
         fn_view: User
     },
     {
-        ej: '/user/:id/post/:postId',
-        path: /^\/user\/([^/]+)\/post\/([^/]+)$/, // Ruta para "/user/:id/post/:postId"
+        ej: '/user/:id/post/:postId',//Ruta dinámica
+        path: /^\/user\/([^/]+)\/post\/([^/]+)$/,
         fn_view: User
     },
     {
-        ej: '/404',
-        path: /^\/404$/, // Ruta para 404
+        ej: '/404', //Ruta para 404
+        path: /^\/404$/,
         fn_view: Error404
-    }
- 
+    } 
 ];
 
 
